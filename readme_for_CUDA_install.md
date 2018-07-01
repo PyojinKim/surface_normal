@@ -77,23 +77,56 @@ Sun Jul  1 17:07:50 2018
 ```
 
 
-## 2. Install CUDA Toolkit (CUDA 8.0)
-You need to specify the `-test_file` in [`config.lua`](./config.lua) with a list of file names pointing to the images you are testing. [`./image/`](./image/) provides an example.
-
-We provide several pretrained models for testing. You can download them in [`./model/`](./model/).
+## 2. Install CUDA Toolkit (CUDA 8.0) & cuDNN v5.1
+Please go to https://hiseon.me/2018/03/11/cuda-install/ and the following the instructions.
 
 Run
 ```
-$ apt-cache search nvidia
+$ sudo apt-get update && sudo apt-get install sudo gnupg
+
+$ cat /etc/apt/sources.list.d/cuda.list
+deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /
+deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /
+$ sudo apt-get update
+
 $ sudo apt-get install cuda-8-0
+$ sudo apt-get install libcudnn5-dev
+$ sudo reboot
+```
+
+Confirm
+```
+$ cat /usr/local/cuda/version.txt
+CUDA Version 8.0.61
+
+$ cat /usr/include/cudnn.h | grep -E "CUDNN_MAJOR|CUDNN_MINOR|CUDNN_PATCHLEVEL"
+#define CUDNN_MAJOR      5
+#define CUDNN_MINOR      1
+#define CUDNN_PATCHLEVEL 10
+#define CUDNN_VERSION    (CUDNN_MAJOR * 1000 + CUDNN_MINOR * 100 + CUDNN_PATCHLEVEL)
 ```
 
 
-## 3. Install cuDNN v5.1 (Jan 20, 2017), for CUDA 8.0
+## 3. Install Torch in LuaJIT
+Please go to http://torch.ch/docs/getting-started.html and the following the instructions.
 
-sudo apt-get install libcudnn5-dev
+Run
+```
+$ git clone https://github.com/torch/distro.git ~/torch --recursive
+$ cd ~/torch
+$ bash install-deps
+$ ./install.sh
 
+$ source ~/.bashrc
+$ luarocks install image
+$ luarocks list
 
+$ luarocks install torch
+$ luarocks install nngraph
+$ luarocks install optim
+$ luarocks install nn
 
-
-## 4. Install Torch
+$ luarocks install cutorch
+$ luarocks install cunn
+$ luarocks install cudnn
+```
