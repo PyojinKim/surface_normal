@@ -21,8 +21,8 @@ function config.parse(arg)
 
     -- data loader
     cmd:option('-train_file', '', 'train file, compulsory');
-    cmd:option('-test_file',  './image/test_list.txt', 'test file, compulsory');
-	
+    cmd:option('-test_file',  '/home/pjinkim/ICSLRGBDdataset/rgbd_dataset_301_13_square1/CVPR2019/rgb_input/test_list.txt', 'test file, compulsory');
+
     -- training and testing
     cmd:option('-gpuid', 1, 'gpu id')
     cmd:option('-optim_state', {rho=0.95, eps=1e-6, learningRate=1e-3, learningRateMin=1e-7, momentum=0.9}, 'optim state')
@@ -50,9 +50,9 @@ function config.parse(arg)
     cmd:option('-ps', '', 'prefix: path&name to model and snapshot')
     cmd:option('-verbose', false, 'show more message')
 
-	-- Parsing the command line 
+	-- Parsing the command line
 	config = cmd:parse(arg or {})
-    config.colors = {{0, 0, 0}, -- black 
+    config.colors = {{0, 0, 0}, -- black
                      {1, 0, 0}, -- red
                      {0, 1, 0}, -- green
                      {0, 0, 1}, -- blue

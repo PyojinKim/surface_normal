@@ -13,7 +13,7 @@ function loadData(file_name, config)
 	    data.output_file = line .. '_norm_camera.png'
 	    data.name       = line
 	    -- end
-	    
+
 	    table.insert(output, data)
 	end
 	print(string.format("%d data loaded.",#output))

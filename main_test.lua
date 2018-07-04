@@ -24,7 +24,7 @@ config.result_path = config.result_path .. "_nyu_sample_test/"
 os.execute("mkdir " .. config.result_path)
 
 -- local model = dofile('model_multi_task.lua')(config.do_normal, config.do_semantic, config.do_boundary, config.do_room)
-local model = dofile(config.model)(config) 
+local model = dofile(config.model)(config)
 
 parameters, gradParameters = model:getParameters()
 model:cuda()
@@ -50,7 +50,7 @@ while batch_iterator.epoch==0 and test_count<=config.max_count do
         saveName = k[#k-1] .. "_" .. k[#k]
     end
 	print(string.format("Testing %s", saveName))
-	
+
 
 	local inputs = batch.input
     inputs = inputs:contiguous():cuda()
@@ -77,5 +77,3 @@ while batch_iterator.epoch==0 and test_count<=config.max_count do
 end
 
 print("Finish!")
-
-
