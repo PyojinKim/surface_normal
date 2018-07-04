@@ -20,7 +20,7 @@ Run
 ```
 th main_test.lua -test_model ./model/sync_physic_nyufinetune.t7
 ```
-and the result will be in [`./result/`](./result/). The estimated normal will be saved in 16-bit PNG format, where 0-65535 in R,G,B channel correspond to [-1, 1] for the X,Y,Z component of the normal vector. We use the camera coordinates defined as - X points to the camera right, Y points to the camera forward, and Z points to the camera upward. For example, right facing wall are very red, floor are very blue, and you rarely see green as it's parallel to the camera viewing direction.
+and the result will be in [`./result/`](./result/). The estimated normal will be saved in 8-bit PNG format (the ground truth for training is in 16-bit), where [0,255] in R,G,B channel corresponds to [-1,1] for the X,Y,Z component of the unit normal vector. We use the camera coordinates defined as - X points to the camera right, Y points to the camera forward, and Z points to the camera upward. For example, right facing wall are very red, floor are very blue, and you rarely see green as it's parallel to the camera viewing direction.
 
 ## Training
 You need to specify the `-train_file` in [`config.lua`](./config.lua) first.
